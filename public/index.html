@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Study Buddy</title>
+<meta name="description" content="Upload your notes, ask questions, and generate quizzes and flashcards - made by Pritish Mishra">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Caveat:wght@500;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="board-texture" aria-hidden="true"></div>
+
+<header class="hero">
+  <div class="chalk-dust" aria-hidden="true"></div>
+  <p class="eyebrow">room 4B — study period</p>
+  <h1 class="hero-title">AI Study Buddy</h1>
+  <p class="hero-sub">Pin up your notes. Ask it anything. Quiz yourself before the test finds out first.</p>
+</header>
+
+<main class="board">
+
+  <nav class="tabs" role="tablist" aria-label="Study tools">
+    <button class="tab is-active" data-tab="notes" role="tab" aria-selected="true">📌 Notes</button>
+    <button class="tab" data-tab="ask" role="tab" aria-selected="false">💬 Ask</button>
+    <button class="tab" data-tab="quiz" role="tab" aria-selected="false">📝 Quiz</button>
+    <button class="tab" data-tab="cards" role="tab" aria-selected="false">🃏 Flashcards</button>
+  </nav>
+
+  <!-- NOTES PANEL -->
+  <section class="panel is-active" id="panel-notes">
+    <div class="panel-head">
+      <h2>Your notes, pinned up</h2>
+      <p class="panel-hint">Drop in PDFs or paste text. Everything answering your questions comes only from what's here.</p>
+    </div>
+
+    <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload notes or PDFs">
+      <input type="file" id="fileInput" accept=".pdf,.txt,.md" multiple hidden>
+      <p class="dz-headline">Drag files here, or <span class="dz-link">browse</span></p>
+      <p class="dz-sub">PDF, TXT, or Markdown — stays in your browser, never uploaded anywhere but the AI call itself</p>
+    </div>
+
+    <div class="or-divider"><span>or paste text straight in</span></div>
+
+    <textarea id="pasteText" class="paste-area" placeholder="Paste lecture notes, a chapter, your handwriting transcribed... anything."></textarea>
+    <button class="btn btn-chalk-yellow" id="addPasteBtn">Pin these notes</button>
+
+    <div class="notecards" id="noteCards"></div>
+  </section>
+
+  <!-- ASK PANEL -->
+  <section class="panel" id="panel-ask">
+    <div class="panel-head">
+      <h2>Ask your notes anything</h2>
+      <p class="panel-hint">Answers are grounded only in what you've pinned — no outside guessing.</p>
+    </div>
+    <div class="chat-log" id="chatLog">
+      <div class="chat-msg chat-msg-bot">
+        <span class="chat-avatar">🖍️</span>
+        <div class="chat-bubble">Pin some notes first, then ask away — "explain the Krebs cycle," "what's on slide 12," whatever you need.</div>
+      </div>
+    </div>
+    <form class="ask-form" id="askForm">
+      <input type="text" id="askInput" placeholder="Ask a question about your notes..." autocomplete="off">
+      <button type="submit" class="btn btn-chalk-blue" id="askBtn">Ask</button>
+    </form>
+  </section>
+
+  <!-- QUIZ PANEL -->
+  <section class="panel" id="panel-quiz">
+    <div class="panel-head">
+      <h2>Pop quiz</h2>
+      <p class="panel-hint">Multiple choice, generated fresh from your notes.</p>
+    </div>
+    <div class="quiz-controls">
+      <label for="quizCount">Questions:</label>
+      <select id="quizCount">
+        <option value="5">5</option>
+        <option value="8" selected>8</option>
+        <option value="12">12</option>
+      </select>
+      <button class="btn btn-chalk-pink" id="genQuizBtn">Generate quiz</button>
+    </div>
+    <div class="tally" id="quizTally" hidden>
+      <span id="tallyText">Score: 0 / 0</span>
+    </div>
+    <div id="quizArea" class="quiz-area"></div>
+  </section>
+
+  <!-- FLASHCARDS PANEL -->
+  <section class="panel" id="panel-cards">
+    <div class="panel-head">
+      <h2>Flashcards</h2>
+      <p class="panel-hint">Click a card to flip it. Sort what you know from what needs another pass.</p>
+    </div>
+    <div class="quiz-controls">
+      <label for="cardCount">Cards:</label>
+      <select id="cardCount">
+        <option value="8">8</option>
+        <option value="12" selected>12</option>
+        <option value="20">20</option>
+      </select>
+      <button class="btn btn-chalk-yellow" id="genCardsBtn">Generate flashcards</button>
+    </div>
+    <div id="cardDeck" class="card-deck"></div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p> Passion Project by Pritish Mishra <a href="https://github.com/" id="repoLink" target="_blank" rel="noopener">open source on GitHub</a></p>
+</footer>
+
+<div class="toast" id="toast" hidden></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 {
   "name": "ai-study-buddy",
   "version": "1.0.0",
-  "description": "Upload notes, ask questions, and generate quizzes and flashcards — powered by Claude.",
+  "description": "Upload notes, ask questions, and generate quizzes and flashcards — passion project by 11th grader- Pritish Mishra",
   "private": true,
   "license": "MIT",
   "engines": {

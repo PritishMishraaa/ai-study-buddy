@@ -1,6 +1,4 @@
-// Shared helper used by all /api/* serverless functions.
-// Uses Google's Gemini API, which has a genuinely free tier (no credit card
-// required) — plenty of headroom for a class of 20-50 students.
+
 const MODEL = 'gemini-3.1-flash-lite';
 
 async function callGemini({ system, message, maxTokens = 1500 }) {
